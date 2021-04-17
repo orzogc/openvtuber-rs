@@ -6,7 +6,6 @@ mod head_pose_estimation;
 mod types;
 
 pub mod opencv_utils;
-pub mod pnp;
 pub mod utils;
 
 pub use alignment::*;
