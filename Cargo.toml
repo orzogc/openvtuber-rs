@@ -10,7 +10,7 @@ categories = ["computer-vision"]
 keywords = ["vtuber", "face-detection ", "face-alignment"]
 license = "GPL-3.0-only"
 edition = "2018"
-exclude = ["examples/assets/*"]
+exclude = ["examples/assets/*", "models/*"]
 
 [dependencies]
 image = { version = "0.23.14", default-features = false }
