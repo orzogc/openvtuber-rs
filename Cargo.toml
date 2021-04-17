@@ -1,10 +1,11 @@
 [package]
 name = "openvtuber-rs"
-version = "0.1.3"
+version = "0.1.4"
 authors = ["orzogc <orzogc@163.com>"]
 description = "Rust port of OpenVtuber"
 homepage = "https://github.com/orzogc/openvtuber-rs"
 repository = "https://github.com/orzogc/openvtuber-rs"
+documentation = "https://docs.rs/openvtuber-rs"
 readme = "README.md"
 categories = ["computer-vision"]
 keywords = ["vtuber", "face-detection", "face-alignment"]
@@ -19,6 +20,9 @@ opencv = { version = "0.52.0", features = ["clang-runtime"] }
 tflite = "0.9.5"
 thiserror = "1.0.24"
 
+[features]
+docs = ["opencv/docs-only"]
+
 [[example]]
 name = "face_detection"
 
@@ -27,3 +31,6 @@ name = "face_alignment"
 
 [[example]]
 name = "head_pose"
+
+[package.metadata.docs.rs]
+features = ["docs"]
