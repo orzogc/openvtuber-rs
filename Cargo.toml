@@ -1,6 +1,6 @@
 [package]
 name = "openvtuber-rs"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["orzogc <orzogc@163.com>"]
 description = "Rust port of OpenVtuber"
 homepage = "https://github.com/orzogc/openvtuber-rs"
@@ -10,6 +10,7 @@ categories = ["computer-vision"]
 keywords = ["vtuber", "face-detection ", "face-alignment"]
 license = "GPL-3.0-only"
 edition = "2018"
+exclude = ["examples/assets/*"]
 
 [dependencies]
 image = { version = "0.23.14", default-features = false }
