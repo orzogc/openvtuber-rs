@@ -186,7 +186,7 @@ mod tests {
         use opencv::videoio::{VideoCapture, CAP_ANY};
 
         let mut cap = VideoCapture::from_file(
-            "/home/orzogc/Downloads/o_1f28i1vcc1gvij771gaf12fq1opg0.jpeg",
+            "examples/assets/kira.gif",
             CAP_ANY,
         )?;
         let mut frame = Mat::default();
