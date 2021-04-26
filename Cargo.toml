@@ -16,12 +16,9 @@ exclude = ["examples/assets/*", "models/*"]
 [dependencies]
 image = { version = "0.23.14", default-features = false }
 ndarray = "0.15.1"
-opencv = { version = "0.52.0", features = ["clang-runtime"] }
+opencv = { version = "0.53.0", features = ["clang-runtime"] }
 tflite = "0.9.5"
 thiserror = "1.0.24"
-
-[features]
-docs = ["opencv/docs-only"]
 
 [[example]]
 name = "face_detection"
@@ -33,4 +30,5 @@ name = "face_alignment"
 name = "head_pose"
 
 [package.metadata.docs.rs]
-features = ["docs"]
+no-default-features = true
+features = ["opencv/docs-only"]

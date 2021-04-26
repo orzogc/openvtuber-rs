@@ -4,7 +4,7 @@ use crate::{OpenVtuberError, Result};
 use image::imageops::{resize, FilterType};
 use image::{ImageBuffer, Pixel};
 use ndarray::prelude::*;
-use ndarray::{Data, RawData, RawDataClone, ViewRepr};
+use ndarray::{Data, RawDataClone, ViewRepr};
 use opencv::prelude::*;
 
 #[derive(Clone, Copy, Debug, Default, Eq, Hash, PartialEq)]
@@ -48,35 +48,10 @@ impl<T> From<Point<T>> for [T; 2] {
     }
 }
 
-impl<T: Copy> From<&[T]> for Point<T> {
-    #[inline]
-    fn from(p: &[T]) -> Self {
-        Self { x: p[0], y: p[1] }
-    }
-}
-
-impl<T: Copy> From<Vec<T>> for Point<T> {
-    #[inline]
-    fn from(p: Vec<T>) -> Self {
-        Self { x: p[0], y: p[1] }
-    }
-}
-
 impl<T> From<Point<T>> for Vec<T> {
     #[inline]
     fn from(p: Point<T>) -> Self {
         vec![p.x, p.y]
-    }
-}
-
-impl<T, S> From<ArrayBase<S, Ix1>> for Point<T>
-where
-    T: Copy,
-    S: RawData<Elem = T> + Data,
-{
-    #[inline]
-    fn from(p: ArrayBase<S, Ix1>) -> Self {
-        Self { x: p[0], y: p[1] }
     }
 }
 
@@ -346,58 +321,10 @@ impl<T> From<Rectangle<T>> for [Point<T>; 2] {
     }
 }
 
-impl<T: Copy> From<&[T]> for Rectangle<T> {
-    #[inline]
-    fn from(r: &[T]) -> Self {
-        Self {
-            x1: r[0],
-            y1: r[1],
-            x2: r[2],
-            y2: r[3],
-        }
-    }
-}
-
-impl<T: Copy> From<&[Point<T>]> for Rectangle<T> {
-    #[inline]
-    fn from(r: &[Point<T>]) -> Self {
-        Self {
-            x1: r[0].x,
-            y1: r[0].y,
-            x2: r[1].x,
-            y2: r[1].y,
-        }
-    }
-}
-
-impl<T: Copy> From<Vec<T>> for Rectangle<T> {
-    #[inline]
-    fn from(r: Vec<T>) -> Self {
-        Self {
-            x1: r[0],
-            y1: r[1],
-            x2: r[2],
-            y2: r[3],
-        }
-    }
-}
-
 impl<T> From<Rectangle<T>> for Vec<T> {
     #[inline]
     fn from(r: Rectangle<T>) -> Self {
         vec![r.x1, r.y1, r.x2, r.y2]
-    }
-}
-
-impl<T: Copy> From<Vec<Point<T>>> for Rectangle<T> {
-    #[inline]
-    fn from(r: Vec<Point<T>>) -> Self {
-        Self {
-            x1: r[0].x,
-            y1: r[0].y,
-            x2: r[1].x,
-            y2: r[1].y,
-        }
     }
 }
 
@@ -408,42 +335,10 @@ impl<T> From<Rectangle<T>> for Vec<Point<T>> {
     }
 }
 
-impl<T, S> From<ArrayBase<S, Ix1>> for Rectangle<T>
-where
-    T: Copy,
-    S: RawData<Elem = T> + Data,
-{
-    #[inline]
-    fn from(r: ArrayBase<S, Ix1>) -> Self {
-        Self {
-            x1: r[0],
-            y1: r[1],
-            x2: r[2],
-            y2: r[3],
-        }
-    }
-}
-
 impl<T> From<Rectangle<T>> for Array1<T> {
     #[inline]
     fn from(r: Rectangle<T>) -> Self {
         array![r.x1, r.y1, r.x2, r.y2]
-    }
-}
-
-impl<T, S> From<ArrayBase<S, Ix2>> for Rectangle<T>
-where
-    T: Copy,
-    S: RawData<Elem = T> + Data,
-{
-    #[inline]
-    fn from(r: ArrayBase<S, Ix2>) -> Self {
-        Self {
-            x1: r[(0, 0)],
-            y1: r[(0, 1)],
-            x2: r[(1, 0)],
-            y2: r[(1, 1)],
-        }
     }
 }
 

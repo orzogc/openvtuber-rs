@@ -1,5 +1,5 @@
 use crate::utils::{build_interpreter, convert_image_to_array3};
-use crate::{Input, Points, Rectangle, Result};
+use crate::{Input, Point, Points, Rectangle, Result};
 use image::imageops::FilterType;
 use image::{ImageBuffer, Rgb};
 use ndarray::prelude::*;
@@ -98,7 +98,12 @@ impl<'a> FaceAlignment<'a> {
         Ok(out
             .dot(&i_m.t())
             .outer_iter()
-            .map(|o| o.as_standard_layout().as_slice().unwrap().into()) // `unwrap()` is safe here.
+            .map(|o| {
+                let p = o.as_standard_layout();
+                // `unwrap()` is safe here.
+                let p = p.as_slice().unwrap();
+                Point::new(p[0], p[1])
+            })
             .collect::<Vec<_>>()
             .into())
     }

@@ -73,8 +73,10 @@ impl<'a> FaceDetection<'a> {
             .zip(&conf_mask)
             .filter_map(|(bo, b)| {
                 if *b {
+                    let r = bo.as_standard_layout();
                     // `unwrap()` is safe here.
-                    Some(bo.as_standard_layout().as_slice().unwrap().into())
+                    let r = r.as_slice().unwrap();
+                    Some(Rectangle::new(r[0], r[1], r[2], r[3]))
                 } else {
                     None
                 }
