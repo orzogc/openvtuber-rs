@@ -510,7 +510,7 @@ impl<'a> core::iter::IntoIterator for &'a Points {
     type IntoIter = core::slice::Iter<'a, Point<f32>>;
 
     fn into_iter(self) -> Self::IntoIter {
-        (&self.0).into_iter()
+        (&self.0).iter()
     }
 }
 
@@ -520,7 +520,7 @@ impl<'a> core::iter::IntoIterator for &'a mut Points {
     type IntoIter = core::slice::IterMut<'a, Point<f32>>;
 
     fn into_iter(self) -> Self::IntoIter {
-        (&mut self.0).into_iter()
+        (&mut self.0).iter_mut()
     }
 }
 
@@ -675,7 +675,7 @@ impl<'a> core::iter::IntoIterator for &'a Rectangles {
     type IntoIter = core::slice::Iter<'a, Rectangle<f32>>;
 
     fn into_iter(self) -> Self::IntoIter {
-        (&self.0).into_iter()
+        (&self.0).iter()
     }
 }
 
@@ -685,7 +685,7 @@ impl<'a> core::iter::IntoIterator for &'a mut Rectangles {
     type IntoIter = core::slice::IterMut<'a, Rectangle<f32>>;
 
     fn into_iter(self) -> Self::IntoIter {
-        (&mut self.0).into_iter()
+        (&mut self.0).iter_mut()
     }
 }
 

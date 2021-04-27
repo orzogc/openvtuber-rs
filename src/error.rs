@@ -9,7 +9,7 @@ pub enum OpenVtuberError {
     #[error(transparent)]
     NdarrayShapeError(#[from] ndarray::ShapeError),
     #[error(transparent)]
-    OpenCVError(#[from] opencv::Error),
+    OpenCvError(#[from] opencv::Error),
     #[error(transparent)]
     TfLiteError(#[from] tflite::Error),
     #[error(transparent)]

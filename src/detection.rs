@@ -45,7 +45,7 @@ impl<'a> FaceDetection<'a> {
         let boxes = self.get_boxes()?;
         let scores = self.get_scores()?;
 
-        let mut boxes = self.post_processing(boxes, scores)?;
+        let mut boxes = self.post_processing(boxes, scores);
         for b in boxes.iter_mut() {
             b.x1 *= width;
             b.y1 *= height;
@@ -63,7 +63,7 @@ impl<'a> FaceDetection<'a> {
         Ok(norm.insert_axis(Axis(0)))
     }
 
-    fn post_processing(&self, boxes: Array2<f32>, scores: Array2<f32>) -> Result<Rectangles> {
+    fn post_processing(&self, boxes: Array2<f32>, scores: Array2<f32>) -> Rectangles {
         let boxes = self.decode_regression(boxes);
         let scores = scores.index_axis(Axis(1), 1);
 
@@ -89,11 +89,7 @@ impl<'a> FaceDetection<'a> {
             .filter_map(|(s, b)| if *b { Some(*s) } else { None })
             .collect::<Vec<_>>();
 
-        Ok(non_max_suppression(
-            boxes.into(),
-            scores,
-            self.nms_iou_threshold,
-        ))
+        non_max_suppression(boxes.into(), scores, self.nms_iou_threshold)
     }
 
     fn decode_regression(&self, reg: Array2<f32>) -> Array2<f32> {

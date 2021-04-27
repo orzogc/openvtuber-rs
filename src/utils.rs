@@ -27,9 +27,7 @@ where
     array
 }
 
-pub(crate) fn build_interpreter<'a>(
-    filepath: &'a str,
-) -> Result<Interpreter<'a, BuiltinOpResolver>> {
+pub(crate) fn build_interpreter(filepath: &str) -> Result<Interpreter<BuiltinOpResolver>> {
     let model = FlatBufferModel::build_from_file(filepath)?;
     let resolver = BuiltinOpResolver::default();
     let builder = InterpreterBuilder::new(model, resolver)?;
@@ -185,10 +183,7 @@ mod tests {
         use opencv::prelude::*;
         use opencv::videoio::{VideoCapture, CAP_ANY};
 
-        let mut cap = VideoCapture::from_file(
-            "examples/assets/kira.gif",
-            CAP_ANY,
-        )?;
+        let mut cap = VideoCapture::from_file("examples/assets/kira.gif", CAP_ANY)?;
         let mut frame = Mat::default();
         cap.read(&mut frame)?;
 

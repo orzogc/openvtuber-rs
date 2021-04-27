@@ -28,7 +28,7 @@ impl<'a> FaceAlignment<'a> {
         let (inp, i_m) = self.pre_processing(image, face_box)?;
         let out = self.inference(inp)?;
 
-        Ok(self.post_processing(out, i_m)?)
+        self.post_processing(out, i_m)
     }
 
     fn pre_processing<S>(
